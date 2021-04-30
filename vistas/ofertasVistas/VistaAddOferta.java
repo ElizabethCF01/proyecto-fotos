@@ -7,7 +7,6 @@ import javax.swing.*;
 import controladorOfertas.ControlOffers;
 import eventosOfertas.EAnnadirOffer;
 
-
 public class VistaAddOferta extends JPanel {
 	
 	private JLabel Nombre,Precio;
@@ -17,9 +16,8 @@ public class VistaAddOferta extends JPanel {
 	private EAnnadirOffer ev;
 	private JPanel panelSup,panelInf;
 	private ControlOffers controlOff;
-
 	
-	public VistaAddOferta() {
+    public VistaAddOferta() {
 		
 		controlOff= new ControlOffers();
 		
@@ -64,10 +62,5 @@ public class VistaAddOferta extends JPanel {
 		
 		add(panelSup,BorderLayout.NORTH);
 		add(panelInf,BorderLayout.CENTER);
-		
-	}
-	
-	
-		
-	}
-
+		}
+}
