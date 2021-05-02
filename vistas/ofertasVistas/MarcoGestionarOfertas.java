@@ -20,7 +20,7 @@ public class MarcoGestionarOfertas extends JFrame{
 		setBounds(400,200,650,400);
 		
 		
-		vistaOffers= new VistaAddOferta();
+		vistaOffers= new VistaGestionOffer();
 		add(vistaOffers);
 	}
 }

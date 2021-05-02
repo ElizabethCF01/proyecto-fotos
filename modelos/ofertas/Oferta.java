@@ -2,16 +2,16 @@ package ofertas;
 
 public class Oferta {
 	private String nombre;
-	private int precio;
+	private float precio;
 
-	public Oferta(String n,int p ) {
+	public Oferta(String n,float p ) {
 	
 		nombre=n;
 		precio=p;
 		
 	}
 	
-	public int getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 	public String getNombre() {

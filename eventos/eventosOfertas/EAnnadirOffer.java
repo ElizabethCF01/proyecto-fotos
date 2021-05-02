@@ -9,16 +9,23 @@ import ofertas.Oferta;
 
 public class EAnnadirOffer implements ActionListener  {
 	
-	private JTextField CajaTextN,CajaTextP;
+	private JTextField cajaTextN,cajaTextP,cajaNoOf;
+	
 	private JTextArea area;
+	
 	private String name;
-	private int cost;
+	
+	private float cost;
+	
 	private ControlOffers c;
 	
-public EAnnadirOffer(JTextField n,JTextField p, JTextArea a) {
+	private int numeroOffer;
+	
+public EAnnadirOffer(JTextField n,JTextField p,JTextField no, JTextArea a) {
 		
-		CajaTextN=n;
-		CajaTextP=p;
+		cajaTextN=n;
+		cajaTextP=p;
+		cajaNoOf=no;
 		area=a;
 		
 		c=new ControlOffers();
@@ -26,8 +33,11 @@ public EAnnadirOffer(JTextField n,JTextField p, JTextArea a) {
 
    public void actionPerformed(ActionEvent evento) {
 	
-	  name= CajaTextN.getText();
-	  cost=Integer.parseInt(CajaTextP.getText());
+	  name= cajaTextN.getText();
+	  cost=Float.parseFloat(cajaTextP.getText());
+	  numeroOffer= c.getOffers().size()+1; 
+	  
+	  cajaNoOf.setText(""+numeroOffer);
 	  
 	  c.getOffers().add(new Oferta(name,cost));
 	  
@@ -37,10 +47,11 @@ public EAnnadirOffer(JTextField n,JTextField p, JTextArea a) {
 		 
 	  
 	  area.setText(area.getText()+"Oferta "+(i+1)+" :"+c.getOffers().get(i).getNombre()
-		        + "   Precio: "+c.getOffers().get(i).getPrecio()+ System.lineSeparator());
+		        + "  Precio: "+c.getOffers().get(i).getPrecio()+" USD" + System.lineSeparator());
 
-	  
+	 
 
 	  }
+	  
   }
 }
