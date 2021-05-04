@@ -10,7 +10,7 @@ public class ControlOffers {
 	
 	 
 	private static ArrayList <Oferta> ofertas;
-	private Iterator <Oferta> iter;
+	
 	
 	public ControlOffers() {
 		
@@ -20,7 +20,7 @@ public class ControlOffers {
 		ofertas.add(new Oferta("Fotos 10x12 ", 20));
 		ofertas.add(new Oferta("Fotos 15x20 ", 30));
 		
-		iter= ofertas.iterator();
+	
 	}
 	
 	public ArrayList<Oferta> getOffers(){
