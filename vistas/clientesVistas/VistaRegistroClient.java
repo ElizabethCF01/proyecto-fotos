@@ -1,5 +1,7 @@
 package clientesVistas;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,30 +10,35 @@ import javax.swing.JTextField;
 
 import controlClientes.ControlClient;
 import eventosClientes.EVerDatosClient;
+import eventosClientes.EvIraAgreg;
 
 public class VistaRegistroClient extends JPanel {
 
 	private JTextArea area;
 
-	private JLabel noClientes;
+	private JPanel panelAux, panelAux2, panelInf;
 
-	private JPanel panelAux;
-
-	private JTextField numCl, nom;
+	private JTextField numCl;
 
 	private ControlClient cl;
 
-	private JButton acceder, agregar;
+	private JButton acceder, agregar, anterior;
 
 	private EVerDatosClient evVerDatos;
 
 	private VistaGestionCliente vVerDatosCl;
 
+	private EvIraAgreg evIr, evVolver;
+
 	public VistaRegistroClient() {
 
+		setLayout(new BorderLayout());
+
 		panelAux = new JPanel();
+		panelAux2 = new JPanel();
+		panelInf = new JPanel();
+
 		vVerDatosCl = new VistaGestionCliente();
-		nom = vVerDatosCl.getCajaNombre();
 
 		area = new JTextArea();
 
@@ -41,6 +48,9 @@ public class VistaRegistroClient extends JPanel {
 
 		acceder = new JButton("Acceder");
 		agregar = new JButton("Agregar nuevo cliente");
+		anterior = new JButton("Regresar al registo");
+
+		anterior.setVisible(false);
 
 		cl = new ControlClient();
 
@@ -51,9 +61,15 @@ public class VistaRegistroClient extends JPanel {
 		}
 
 		evVerDatos = new EVerDatosClient(vVerDatosCl, this, vVerDatosCl.getCajaNombre(), vVerDatosCl.getCajaEdad(),
-				vVerDatosCl.getCajaTel(), vVerDatosCl.getVerifAcomp(), numCl);
+				vVerDatosCl.getCajaTel(), vVerDatosCl.getVerifAcomp(), numCl, vVerDatosCl.getAreaOf());
 
 		acceder.addActionListener(evVerDatos);
+
+		evIr = new EvIraAgreg(vVerDatosCl, this);
+		agregar.addActionListener(evIr);
+
+		evVolver = new EvIraAgreg(panelAux, this);
+		anterior.addActionListener(evVolver);
 
 		panelAux.add(area);
 		panelAux.add(noClientes);
@@ -61,12 +77,23 @@ public class VistaRegistroClient extends JPanel {
 		panelAux.add(acceder);
 		panelAux.add(agregar);
 
-		add(panelAux);
+		panelInf.add(anterior);
+
+		panelAux2.add(panelAux);
+		add(panelAux2, BorderLayout.NORTH);
+
+		add(panelInf, BorderLayout.SOUTH);
+
 	}
 
 	public void cambiarVista(JPanel p) {
-		this.panelAux.removeAll();
-		this.panelAux.add(p);
+		this.panelAux2.removeAll();
+		this.panelAux2.add(p);
 		this.updateUI();
 	}
+
+	public JButton getBotAnt() {
+		return anterior;
+	}
+
 }

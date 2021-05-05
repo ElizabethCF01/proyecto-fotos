@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import clientesVistas.VistaGestionCliente;
@@ -24,17 +25,20 @@ public class EVerDatosClient implements ActionListener {
 
 	private int noClient;
 
-	public EVerDatosClient(VistaGestionCliente v, VistaRegistroClient r, JTextField n, JTextField e, JTextField tel,
-			JCheckBox a, JTextField numCl) {
+	private JTextArea area;
 
-		numCliente = numCl;
-		panelCamb = v;
-		vistaConten = r;
-		name = n;
-		age = e;
-		phone = tel;
-		acomp = a;
+	public EVerDatosClient(VistaGestionCliente panelCamb, VistaRegistroClient vistaConten, JTextField name,
+			JTextField age, JTextField phone, JCheckBox acomp, JTextField numCliente, JTextArea area) {
+
+		this.numCliente = numCliente;
+		this.panelCamb = panelCamb;
+		this.vistaConten = vistaConten;
+		this.name = name;
+		this.age = age;
+		this.phone = phone;
+		this.acomp = acomp;
 		controlCl = new ControlClient();
+		this.area = area;
 	}
 
 	@Override
@@ -42,7 +46,16 @@ public class EVerDatosClient implements ActionListener {
 
 		vistaConten.cambiarVista(panelCamb);
 
+		panelCamb.getPanelCent().setVisible(false);
+
+		vistaConten.getBotAnt().setVisible(true);
+
 		noClient = Integer.parseInt(numCliente.getText());
+
+		name.setEnabled(false);
+		age.setEnabled(false);
+		phone.setEnabled(false);
+		acomp.setEnabled(false);
 
 		name.setText(controlCl.getClientes().get(noClient - 1).getNombre());
 		age.setText("" + controlCl.getClientes().get(noClient - 1).getEdad());
@@ -52,6 +65,16 @@ public class EVerDatosClient implements ActionListener {
 		} else {
 			acomp.setSelected(false);
 		}
+
+		area.setText("");
+		for (int i = 0; i < controlCl.getClientes().get(noClient - 1).getTiposOfertasCant().size(); i++) {
+
+			area.setText(area.getText() + controlCl.getClientes().get(noClient - 1).getCadenaOfCant().get(i)
+					+ System.lineSeparator());
+		}
+
+		// System.out.println(controlCl.getClientes().get(noClient-
+		// 1).getCadenaOfCant());
 	}
 
 }

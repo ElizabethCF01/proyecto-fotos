@@ -2,8 +2,8 @@ package clientes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import controladorOfertas.ControlOffers;
 import ofertas.Oferta;
 
 public class Cliente {
@@ -16,45 +16,41 @@ public class Cliente {
 
 	private int telef;
 
-	private ArrayList<Oferta> tiposOffers;
+	private ArrayList<String> tiposOffers;
 
-	private HashMap<String, Integer> tiposOfferCant;
+	private HashMap<Oferta, Integer> tiposOfferCant;
 
-	private ControlOffers controlOf;
+	// private ControlOffers controlOf;
 
-	public Cliente(String name, boolean acomp, int ed, int tel) {
+	public Cliente(String nombreApellidos, boolean acompannante, int edad, int telef) {
 
-		nombreApellidos = name;
-		acompannante = acomp;
-		edad = ed;
-		telef = tel;
-		tiposOffers = new ArrayList<Oferta>();
-		tiposOfferCant = new HashMap<String, Integer>();
+		this.nombreApellidos = nombreApellidos;
+		this.acompannante = acompannante;
+		this.edad = edad;
+		this.telef = telef;
+		tiposOffers = new ArrayList<String>();
+		tiposOfferCant = new HashMap<Oferta, Integer>();
 
 	}
 
 	public String getNombre() {
-		return nombreApellidos;
+		return this.nombreApellidos;
 	}
 
 	public boolean getAcompannante() {
-		return acompannante;
+		return this.acompannante;
 	}
 
 	public int getEdad() {
-		return edad;
+		return this.edad;
 	}
 
 	public int getTelefono() {
-		return telef;
+		return this.telef;
 	}
 
-	public ArrayList<Oferta> getTiposOffers() {
-		return tiposOffers;
-	}
-
-	public HashMap<String, Integer> getTiposOfertasCant() {
-		return tiposOfferCant;
+	public HashMap<Oferta, Integer> getTiposOfertasCant() {
+		return this.tiposOfferCant;
 	}
 
 	public void setNombre(String name) {
@@ -71,6 +67,21 @@ public class Cliente {
 
 	public void setTelef(int tel) {
 		telef = tel;
+	}
+
+	public ArrayList<String> getCadenaOfCant() {
+
+		for (Map.Entry<Oferta, Integer> entrada : tiposOfferCant.entrySet()) {
+
+			Oferta o = entrada.getKey();
+			int c = entrada.getValue();
+
+			String s = o.getNombre() + "   " + o.getPrecio() + "   " + c;
+
+			tiposOffers.add(s);
+
+		}
+		return tiposOffers;
 	}
 
 }
