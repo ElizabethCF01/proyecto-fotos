@@ -37,8 +37,10 @@ public class EvCajaVisible implements ActionListener {
 			cajaCant.setVisible(true);
 			vista.updateUI();
 
-			// cant = Integer.parseInt(cajaCant.getText());
-			// offerGuard = offerAux;
+		}
+		if (casillaVerif.isSelected() == false) {
+			cajaCant.setVisible(false);
+			vista.updateUI();
 		}
 
 	}

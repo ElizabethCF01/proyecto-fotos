@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import controlClientes.ControlClient;
 import eventosClientes.EVerDatosClient;
 import eventosClientes.EvIraAgreg;
+import eventosClientes.EvVolver;
 
 public class VistaRegistroClient extends JPanel {
 
@@ -28,7 +29,9 @@ public class VistaRegistroClient extends JPanel {
 
 	private VistaGestionCliente vVerDatosCl;
 
-	private EvIraAgreg evIr, evVolver;
+	private EvIraAgreg evIr;
+
+	private EvVolver evVolver;
 
 	public VistaRegistroClient() {
 
@@ -68,7 +71,7 @@ public class VistaRegistroClient extends JPanel {
 		evIr = new EvIraAgreg(vVerDatosCl, this);
 		agregar.addActionListener(evIr);
 
-		evVolver = new EvIraAgreg(panelAux, this);
+		evVolver = new EvVolver(panelAux, this, area);
 		anterior.addActionListener(evVolver);
 
 		panelAux.add(area);
@@ -96,4 +99,7 @@ public class VistaRegistroClient extends JPanel {
 		return anterior;
 	}
 
+	public JTextArea getAreaTexto() {
+		return area;
+	}
 }

@@ -52,6 +52,8 @@ public class EVerDatosClient implements ActionListener {
 
 		noClient = Integer.parseInt(numCliente.getText());
 
+		area.setVisible(true);
+
 		name.setEnabled(false);
 		age.setEnabled(false);
 		phone.setEnabled(false);
@@ -60,6 +62,7 @@ public class EVerDatosClient implements ActionListener {
 		name.setText(controlCl.getClientes().get(noClient - 1).getNombre());
 		age.setText("" + controlCl.getClientes().get(noClient - 1).getEdad());
 		phone.setText("" + controlCl.getClientes().get(noClient - 1).getTelefono());
+
 		if (controlCl.getClientes().get(noClient - 1).getAcompannante()) {
 			acomp.setSelected(true);
 		} else {

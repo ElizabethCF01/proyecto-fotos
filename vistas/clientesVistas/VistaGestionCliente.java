@@ -3,6 +3,7 @@ package clientesVistas;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -37,8 +38,6 @@ public class VistaGestionCliente extends JPanel {
 
 	private EvCajaVisible verCaja;
 
-	// private Map<Oferta,Integer> mapa;
-
 	private JPanel panelSup, panelCent;
 
 	private JButton agregarCl;
@@ -49,7 +48,6 @@ public class VistaGestionCliente extends JPanel {
 
 		setLayout(new BorderLayout());
 
-		// mapa= new Map<Oferta,Integer>();
 		co = new ControlOffers();
 		ofertas = co.getOffers();
 		etiquetasOf = new ArrayList<JLabel>();
@@ -76,7 +74,6 @@ public class VistaGestionCliente extends JPanel {
 
 		panelSup = new JPanel();
 		panelCent = new JPanel();
-		// panelCent.setVisible(false);
 
 		panelSup.add(nombreYapell);
 		panelSup.add(cajaNombreA);
@@ -106,7 +103,11 @@ public class VistaGestionCliente extends JPanel {
 
 	public void AddCheckOffer(ArrayList<Oferta> o, JPanel p) {
 
+		Box cajaVertical = Box.createVerticalBox();
+
 		for (int i = 0; i < o.size(); i++) {
+
+			Box cajaHorizontal = Box.createHorizontalBox();
 
 			String nameOffer = "Oferta: " + o.get(i).getNombre() + "   Precio: " + o.get(i).getPrecio();
 
@@ -119,12 +120,14 @@ public class VistaGestionCliente extends JPanel {
 			verCaja = new EvCajaVisible(casillasOf.get(i), cajasCantOf.get(i), this);
 			casillasOf.get(i).addActionListener(verCaja);
 
-			p.add(etiquetasOf.get(i));
-			p.add(casillasOf.get(i));
-			p.add(cajasCantOf.get(i));
+			cajaHorizontal.add(etiquetasOf.get(i));
+			cajaHorizontal.add(casillasOf.get(i));
+			cajaHorizontal.add(cajasCantOf.get(i));
+
+			cajaVertical.add(cajaHorizontal);
 
 		}
-
+		p.add(cajaVertical);
 	}
 
 	public JTextField getCajaNombre() {
@@ -149,5 +152,14 @@ public class VistaGestionCliente extends JPanel {
 
 	public JPanel getPanelCent() {
 		return panelCent;
+	}
+
+	public ArrayList<JCheckBox> getCasillasOf() {
+		return casillasOf;
+	}
+
+	public ArrayList<JTextField> getCajasCantOf() {
+		return cajasCantOf;
+
 	}
 }

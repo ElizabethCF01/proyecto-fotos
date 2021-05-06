@@ -18,7 +18,7 @@ public class MarcoGestionarOfertas extends JFrame {
 	public MarcoGestionarOfertas() {
 
 		setTitle("Photograph");
-		setBounds(400, 200, 650, 400);
+		setBounds(200, 100, 830, 400);
 
 		vistaGen = new VistaGeneral();
 		add(vistaGen);
