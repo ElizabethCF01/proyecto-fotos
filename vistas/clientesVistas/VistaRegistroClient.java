@@ -44,6 +44,7 @@ public class VistaRegistroClient extends JPanel {
 		vVerDatosCl = new VistaGestionCliente();
 
 		area = new JTextArea();
+		area.setEnabled(false);
 
 		JLabel noClientes = new JLabel("No. Cliente");
 

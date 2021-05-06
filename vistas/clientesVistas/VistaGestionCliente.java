@@ -38,7 +38,7 @@ public class VistaGestionCliente extends JPanel {
 
 	private EvCajaVisible verCaja;
 
-	private JPanel panelSup, panelCent;
+	private JPanel panelSup, panelCent, panelInf;
 
 	private JButton agregarCl;
 
@@ -74,6 +74,7 @@ public class VistaGestionCliente extends JPanel {
 
 		panelSup = new JPanel();
 		panelCent = new JPanel();
+		panelInf = new JPanel();
 
 		panelSup.add(nombreYapell);
 		panelSup.add(cajaNombreA);
@@ -89,15 +90,16 @@ public class VistaGestionCliente extends JPanel {
 
 		panelSup.add(areaOf);
 
-		this.AddCheckOffer(ofertas, panelCent);
+		// this.AddCheckOffer(ofertas, panelCent);
 
 		evAgr = new AgregarNuClient(cajaNombreA, cajaEdad, cajaTelef, verifAcomp, casillasOf, cajasCantOf);
 		agregarCl.addActionListener(evAgr);
 
-		panelCent.add(agregarCl);
+		panelInf.add(agregarCl);
 
 		add(panelSup, BorderLayout.NORTH);
 		add(panelCent, BorderLayout.CENTER);
+		add(panelInf, BorderLayout.SOUTH);
 
 	}
 
@@ -128,6 +130,16 @@ public class VistaGestionCliente extends JPanel {
 
 		}
 		p.add(cajaVertical);
+	}
+
+	public void removeCheckOffers(JPanel p) {
+
+		etiquetasOf.removeAll(etiquetasOf);
+		casillasOf.removeAll(casillasOf);
+		cajasCantOf.removeAll(cajasCantOf);
+
+		p.removeAll();
+
 	}
 
 	public JTextField getCajaNombre() {

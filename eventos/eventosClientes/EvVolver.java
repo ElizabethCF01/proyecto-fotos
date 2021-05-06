@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 
 import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
+import controladorOfertas.ControlOffers;
 
 public class EvVolver implements ActionListener {
 
@@ -19,6 +20,8 @@ public class EvVolver implements ActionListener {
 
 	private ControlClient ctrlCl;
 
+	private ControlOffers ctrlOff;
+
 	public EvVolver(JPanel panelCamb, VistaRegistroClient vistaCon, JTextArea area) {
 
 		this.panelCamb = panelCamb;
@@ -26,11 +29,12 @@ public class EvVolver implements ActionListener {
 		this.area = area;
 
 		ctrlCl = new ControlClient();
+		ctrlOff = new ControlOffers();
 
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		vistaCon.cambiarVista(panelCamb);
 		vistaCon.getBotAnt().setVisible(false);
