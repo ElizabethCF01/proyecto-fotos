@@ -17,7 +17,9 @@ public class VistaRegistroClient extends JPanel {
 
 	private JTextArea area;
 
-	private JPanel panelAux, panelAux2, panelInf;
+	private JPanel panelAux, panelInf;
+
+	private static JPanel panelAux2;
 
 	private JTextField numCl;
 
@@ -90,11 +92,10 @@ public class VistaRegistroClient extends JPanel {
 
 	}
 
-	public void cambiarVista(JPanel p) {
-		this.panelAux2.removeAll();
-		this.panelAux2.add(p);
-		this.updateUI();
-	}
+	/*
+	 * public void cambiarVista(JPanel p) { this.panelAux2.removeAll();
+	 * this.panelAux2.add(p); this.updateUI(); }
+	 */
 
 	public JButton getBotAnt() {
 		return anterior;
@@ -102,5 +103,13 @@ public class VistaRegistroClient extends JPanel {
 
 	public JTextArea getAreaTexto() {
 		return area;
+	}
+
+	public JPanel getPanelDeCambio() {
+		return panelAux2;
+	}
+
+	public JPanel getPanelAux() {
+		return panelAux;
 	}
 }

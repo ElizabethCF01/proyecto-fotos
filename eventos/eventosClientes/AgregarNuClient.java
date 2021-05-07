@@ -39,6 +39,8 @@ public class AgregarNuClient implements ActionListener {
 
 	private HashMap<Oferta, Integer> mapaAux;
 
+	// private VistaRegistroClient v;
+
 	public AgregarNuClient(JTextField cajaNomb, JTextField cajaEdad, JTextField cajaTel, JCheckBox casillaAcomp,
 			ArrayList<JCheckBox> casillasOf, ArrayList<JTextField> cajasCant) {
 		this.cajaNomb = cajaNomb;
@@ -53,11 +55,14 @@ public class AgregarNuClient implements ActionListener {
 
 		mapaAux = new HashMap<Oferta, Integer>();
 
+		// v = new VistaRegistroClient();
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+
+		// controlClient.setAVistaCliente(v.getPanelDeCambio(), v.getPanelAux());
 
 		name = cajaNomb.getText();
 		edad = Integer.parseInt(cajaEdad.getText());
@@ -85,7 +90,7 @@ public class AgregarNuClient implements ActionListener {
 		int n = controlClient.getClientes().size() - 1;
 
 		controlClient.getClientes().get(n).getTiposOfertasCant().putAll(mapaAux);
-
+		// System.out.println(controlClient.getClientes().size());
 	}
 
 }

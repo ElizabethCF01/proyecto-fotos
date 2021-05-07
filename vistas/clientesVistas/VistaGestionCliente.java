@@ -28,7 +28,7 @@ public class VistaGestionCliente extends JPanel {
 
 	private ControlOffers co;
 
-	private ArrayList<Oferta> ofertas;
+	// private ArrayList<Oferta> ofertas;
 
 	private ArrayList<JLabel> etiquetasOf;
 
@@ -49,7 +49,7 @@ public class VistaGestionCliente extends JPanel {
 		setLayout(new BorderLayout());
 
 		co = new ControlOffers();
-		ofertas = co.getOffers();
+		// ofertas = co.getOffers();
 		etiquetasOf = new ArrayList<JLabel>();
 		casillasOf = new ArrayList<JCheckBox>();
 		cajasCantOf = new ArrayList<JTextField>();
@@ -173,5 +173,9 @@ public class VistaGestionCliente extends JPanel {
 	public ArrayList<JTextField> getCajasCantOf() {
 		return cajasCantOf;
 
+	}
+
+	public JButton getBotAgregar() {
+		return agregarCl;
 	}
 }

@@ -2,6 +2,8 @@ package controlClientes;
 
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
+
 import clientes.Cliente;
 import ofertas.Oferta;
 
@@ -17,10 +19,18 @@ public class ControlClient {
 		cliente1.getTiposOfertasCant().put(new Oferta("Fotos 5x8", 25), 3);
 
 		clientes.add(cliente1);
+
 	}
 
 	public ArrayList<Cliente> getClientes() {
 		return clientes;
+	}
+
+	public void setAVistaCliente(JPanel panelCont, JPanel panelAg) {
+		// panelCont = vi.getPanelAux();
+		panelCont.removeAll();
+		panelCont.add(panelAg);
+		panelCont.updateUI();
 	}
 
 }

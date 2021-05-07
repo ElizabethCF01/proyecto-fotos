@@ -44,9 +44,11 @@ public class EVerDatosClient implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		vistaConten.cambiarVista(panelCamb);
+		// vistaConten.cambiarVista(panelCamb);
+		controlCl.setAVistaCliente(vistaConten.getPanelDeCambio(), panelCamb);
 
 		panelCamb.getPanelCent().setVisible(false);
+		panelCamb.getBotAgregar().setVisible(false);
 
 		vistaConten.getBotAnt().setVisible(true);
 

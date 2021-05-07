@@ -7,8 +7,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import clientesVistas.VistaRegistroClient;
-import eventosGeneral.EventosMenuGest;
+import eventosGeneral.EventoMenuGestCl;
+import eventosGeneral.EventosMenuGestOf;
 import ofertasVistas.VistaGestionOffer;
 
 public class VistaGeneral extends JPanel {
@@ -21,13 +21,15 @@ public class VistaGeneral extends JPanel {
 
 	private JMenuItem gestClientes;
 
-	private EventosMenuGest evGestOf, evGestClient;
+	private EventosMenuGestOf evGestOf;
+
+	private EventoMenuGestCl evGestClient;
 
 	private JPanel laminaMenu;
 
 	private VistaGestionOffer vistaOffers;
 
-	private VistaRegistroClient vistaClientes;
+	// private VistaRegistroClient vistaClientes;
 
 	private JPanel panelAux;
 
@@ -49,12 +51,12 @@ public class VistaGeneral extends JPanel {
 
 		vistaOffers = new VistaGestionOffer();
 
-		vistaClientes = new VistaRegistroClient();
+		// vistaClientes = new VistaRegistroClient();
 
-		evGestOf = new EventosMenuGest(this, vistaOffers);
+		evGestOf = new EventosMenuGestOf(panelAux, vistaOffers);
 		gestOfertas.addActionListener(evGestOf);
 
-		evGestClient = new EventosMenuGest(this, vistaClientes);
+		evGestClient = new EventoMenuGestCl(panelAux);
 		gestClientes.addActionListener(evGestClient);
 
 		acciones.add(gestOfertas);
@@ -69,12 +71,12 @@ public class VistaGeneral extends JPanel {
 
 	}
 
-	public void setVista(JPanel pa) {
-		this.panelAux.removeAll();
-		this.panelAux.add(pa, BorderLayout.CENTER);
-		this.updateUI();
-
-	}
+	/*
+	 * public void setVista(JPanel pa) { this.panelAux.removeAll();
+	 * this.panelAux.add(pa, BorderLayout.CENTER); this.updateUI();
+	 * 
+	 * }
+	 */
 
 	public JPanel getPanelAux() {
 		return panelAux;
