@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import clientes.Cliente;
+import clientesVistas.VistaGestionCliente;
+import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
 import controladorOfertas.ControlOffers;
 import ofertas.Oferta;
+import vistasGenerales.VistaGeneral;
 
 public class AgregarNuClient implements ActionListener {
 
@@ -39,10 +43,20 @@ public class AgregarNuClient implements ActionListener {
 
 	private HashMap<Oferta, Integer> mapaAux;
 
+	private VistaGestionCliente vistaGest;
+
+	private VistaRegistroClient vistaReg;
+
+	private JTextArea area;
+
+	// private JPanel p;
+
 	// private VistaRegistroClient v;
 
-	public AgregarNuClient(JTextField cajaNomb, JTextField cajaEdad, JTextField cajaTel, JCheckBox casillaAcomp,
-			ArrayList<JCheckBox> casillasOf, ArrayList<JTextField> cajasCant) {
+	public AgregarNuClient(VistaGestionCliente vistaGest, JTextField cajaNomb, JTextField cajaEdad, JTextField cajaTel,
+			JCheckBox casillaAcomp, ArrayList<JCheckBox> casillasOf, ArrayList<JTextField> cajasCant) {
+
+		this.vistaGest = vistaGest;
 		this.cajaNomb = cajaNomb;
 		this.cajaEdad = cajaEdad;
 		this.cajaTel = cajaTel;
@@ -55,14 +69,17 @@ public class AgregarNuClient implements ActionListener {
 
 		mapaAux = new HashMap<Oferta, Integer>();
 
-		// v = new VistaRegistroClient();
-
+		// this.p=p;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		// controlClient.setAVistaCliente(v.getPanelDeCambio(), v.getPanelAux());
+		vistaReg = VistaGeneral.getVistaRegCl();
+
+		controlClient.setVistaCl(vistaGest, vistaReg);
+		// v.getPanelAux());
+		area = vistaReg.getAreaTexto();
 
 		name = cajaNomb.getText();
 		edad = Integer.parseInt(cajaEdad.getText());
@@ -91,6 +108,14 @@ public class AgregarNuClient implements ActionListener {
 
 		controlClient.getClientes().get(n).getTiposOfertasCant().putAll(mapaAux);
 		// System.out.println(controlClient.getClientes().size());
+
+		area.setText("");
+
+		for (int i = 0; i < controlClient.getClientes().size(); i++) {
+
+			area.setText(area.getText() + (i + 1) + "  " + controlClient.getClientes().get(i).getNombre()
+					+ System.lineSeparator());
+		}
 	}
 
 }

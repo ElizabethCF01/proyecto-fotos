@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import clientesVistas.VistaGestionCliente;
 import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
+import vistasGenerales.VistaGeneral;
 
 public class EVerDatosClient implements ActionListener {
 
@@ -17,9 +18,9 @@ public class EVerDatosClient implements ActionListener {
 
 	private JCheckBox acomp;
 
-	private VistaRegistroClient vistaConten;
+	private VistaRegistroClient vistaACambiar;
 
-	private VistaGestionCliente panelCamb;
+	private VistaGestionCliente vistaAgre;
 
 	private ControlClient controlCl;
 
@@ -27,30 +28,31 @@ public class EVerDatosClient implements ActionListener {
 
 	private JTextArea area;
 
-	public EVerDatosClient(VistaGestionCliente panelCamb, VistaRegistroClient vistaConten, JTextField name,
-			JTextField age, JTextField phone, JCheckBox acomp, JTextField numCliente, JTextArea area) {
+	public EVerDatosClient(VistaRegistroClient vistaACambiar, JTextField numCliente) {
 
 		this.numCliente = numCliente;
-		this.panelCamb = panelCamb;
-		this.vistaConten = vistaConten;
-		this.name = name;
-		this.age = age;
-		this.phone = phone;
-		this.acomp = acomp;
+
+		this.vistaACambiar = vistaACambiar;
+
 		controlCl = new ControlClient();
-		this.area = area;
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		vistaAgre = VistaGeneral.getVistaGestCl();
 		// vistaConten.cambiarVista(panelCamb);
-		controlCl.setAVistaCliente(vistaConten.getPanelDeCambio(), panelCamb);
+		controlCl.setVistaCl(vistaACambiar, vistaAgre);
 
-		panelCamb.getPanelCent().setVisible(false);
-		panelCamb.getBotAgregar().setVisible(false);
+		vistaAgre.getPanelCent().setVisible(false);
+		vistaAgre.getBotAgregar().setVisible(false);
 
-		vistaConten.getBotAnt().setVisible(true);
+		// vistaConten.getBotAnt().setVisible(true);
+		name = vistaAgre.getCajaNombre();
+		age = vistaAgre.getCajaEdad();
+		phone = vistaAgre.getCajaTel();
+		acomp = vistaAgre.getVerifAcomp();
+		area = vistaAgre.getAreaOf();
 
 		noClient = Integer.parseInt(numCliente.getText());
 

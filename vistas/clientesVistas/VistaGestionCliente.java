@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controladorOfertas.ControlOffers;
 import eventosClientes.AgregarNuClient;
 import eventosClientes.EvCajaVisible;
+import eventosClientes.EvVolver;
 import ofertas.Oferta;
 
 public class VistaGestionCliente extends JPanel {
@@ -26,7 +26,7 @@ public class VistaGestionCliente extends JPanel {
 
 	private JTextArea areaOf;
 
-	private ControlOffers co;
+	// private ControlOffers co;
 
 	// private ArrayList<Oferta> ofertas;
 
@@ -40,15 +40,17 @@ public class VistaGestionCliente extends JPanel {
 
 	private JPanel panelSup, panelCent, panelInf;
 
-	private JButton agregarCl;
+	private JButton agregarCl, volverARegistro;
 
 	private AgregarNuClient evAgr;
+
+	private EvVolver evVolver;
 
 	public VistaGestionCliente() {
 
 		setLayout(new BorderLayout());
 
-		co = new ControlOffers();
+		// co = new ControlOffers();
 		// ofertas = co.getOffers();
 		etiquetasOf = new ArrayList<JLabel>();
 		casillasOf = new ArrayList<JCheckBox>();
@@ -68,6 +70,10 @@ public class VistaGestionCliente extends JPanel {
 		verifAcomp = new JCheckBox();
 
 		agregarCl = new JButton("Agregar");
+
+		volverARegistro = new JButton("Volver");
+		evVolver = new EvVolver(this);
+		volverARegistro.addActionListener(evVolver);
 
 		areaOf = new JTextArea();
 		areaOf.setEnabled(false);
@@ -92,10 +98,11 @@ public class VistaGestionCliente extends JPanel {
 
 		// this.AddCheckOffer(ofertas, panelCent);
 
-		evAgr = new AgregarNuClient(cajaNombreA, cajaEdad, cajaTelef, verifAcomp, casillasOf, cajasCantOf);
+		evAgr = new AgregarNuClient(this, cajaNombreA, cajaEdad, cajaTelef, verifAcomp, casillasOf, cajasCantOf);
 		agregarCl.addActionListener(evAgr);
 
 		panelInf.add(agregarCl);
+		panelInf.add(volverARegistro);
 
 		add(panelSup, BorderLayout.NORTH);
 		add(panelCent, BorderLayout.CENTER);

@@ -3,48 +3,33 @@ package eventosClientes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
+import clientesVistas.VistaGestionCliente;
 import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
+import vistasGenerales.VistaGeneral;
 
 public class EvVolver implements ActionListener {
 
-	private VistaRegistroClient vistaCon;
+	private VistaRegistroClient vistaAVolv;
 
-	private JPanel panelCamb;
-
-	private JTextArea area;
+	private VistaGestionCliente panelASust;
 
 	private ControlClient ctrlCl;
 
-	// private ControlOffers ctrlOff;
+	public EvVolver(VistaGestionCliente panelASust) {
 
-	public EvVolver(JPanel panelCamb, VistaRegistroClient vistaCon, JTextArea area) {
-
-		this.panelCamb = panelCamb;
-		this.vistaCon = vistaCon;
-		this.area = area;
+		this.panelASust = panelASust;
 
 		ctrlCl = new ControlClient();
-		// ctrlOff = new ControlOffers();
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		ctrlCl.setAVistaCliente(vistaCon.getPanelDeCambio(), panelCamb);
-		vistaCon.getBotAnt().setVisible(false);
 
-		area.setText("");
+		vistaAVolv = VistaGeneral.getVistaRegCl();
 
-		for (int i = 0; i < ctrlCl.getClientes().size(); i++) {
-
-			area.setText(
-					area.getText() + (i + 1) + "  " + ctrlCl.getClientes().get(i).getNombre() + System.lineSeparator());
-		}
+		ctrlCl.setVistaCl(panelASust, vistaAVolv);
 
 	}
 

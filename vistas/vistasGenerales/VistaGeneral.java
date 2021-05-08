@@ -7,8 +7,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import clientesVistas.VistaGestionCliente;
+import clientesVistas.VistaRegistroClient;
 import eventosGeneral.EventoMenuGestCl;
-import eventosGeneral.EventosMenuGestOf;
+import eventosGeneral.EventoMenuGestOf;
 import ofertasVistas.VistaGestionOffer;
 
 public class VistaGeneral extends JPanel {
@@ -21,7 +23,7 @@ public class VistaGeneral extends JPanel {
 
 	private JMenuItem gestClientes;
 
-	private EventosMenuGestOf evGestOf;
+	// private EventosMenuGestOf evGestOf;
 
 	private EventoMenuGestCl evGestClient;
 
@@ -29,13 +31,13 @@ public class VistaGeneral extends JPanel {
 
 	private VistaGestionOffer vistaOffers;
 
-	// private VistaRegistroClient vistaClientes;
+	private static VistaRegistroClient vistaRClientes;
 
-	private JPanel panelAux;
+	private static VistaGestionCliente vistaGestCl;
+
+	private EventoMenuGestOf evGestOf;
 
 	public VistaGeneral() {
-
-		panelAux = new JPanel();
 
 		setLayout(new BorderLayout(8, 8));
 
@@ -50,14 +52,20 @@ public class VistaGeneral extends JPanel {
 		gestClientes = new JMenuItem("Gestionar Clientes");
 
 		vistaOffers = new VistaGestionOffer();
+		vistaOffers.setVisible(false);
 
-		// vistaClientes = new VistaRegistroClient();
+		vistaRClientes = new VistaRegistroClient();
+		vistaRClientes.setVisible(false);
 
-		evGestOf = new EventosMenuGestOf(panelAux, vistaOffers);
-		gestOfertas.addActionListener(evGestOf);
+		vistaGestCl = new VistaGestionCliente();
+		vistaGestCl.setVisible(false);
+		// vistaGestCl.setSize(0, 0);
 
-		evGestClient = new EventoMenuGestCl(panelAux);
+		evGestClient = new EventoMenuGestCl(vistaOffers, vistaGestCl, vistaRClientes);
 		gestClientes.addActionListener(evGestClient);
+
+		evGestOf = new EventoMenuGestOf(vistaRClientes, vistaGestCl, vistaOffers);
+		gestOfertas.addActionListener(evGestOf);
 
 		acciones.add(gestOfertas);
 		acciones.add(gestClientes);
@@ -67,18 +75,18 @@ public class VistaGeneral extends JPanel {
 		laminaMenu.add(barra);
 
 		add(laminaMenu, BorderLayout.WEST);
-		add(panelAux, BorderLayout.CENTER);
+
+		add(vistaOffers, BorderLayout.CENTER);
+		add(vistaRClientes, BorderLayout.CENTER);
+		add(vistaGestCl, BorderLayout.CENTER);
 
 	}
 
-	/*
-	 * public void setVista(JPanel pa) { this.panelAux.removeAll();
-	 * this.panelAux.add(pa, BorderLayout.CENTER); this.updateUI();
-	 * 
-	 * }
-	 */
+	public static VistaGestionCliente getVistaGestCl() {
+		return vistaGestCl;
+	}
 
-	public JPanel getPanelAux() {
-		return panelAux;
+	public static VistaRegistroClient getVistaRegCl() {
+		return vistaRClientes;
 	}
 }

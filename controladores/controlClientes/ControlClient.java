@@ -26,11 +26,27 @@ public class ControlClient {
 		return clientes;
 	}
 
-	public void setAVistaCliente(JPanel panelCont, JPanel panelAg) {
+	public void setVista(JPanel panelCamb1, JPanel panelCamb2, JPanel panelAgr) {
 		// panelCont = vi.getPanelAux();
-		panelCont.removeAll();
-		panelCont.add(panelAg);
-		panelCont.updateUI();
+		/*
+		 * panelCont.removeAll(); panelCont.add(panelAg); panelCont.updateUI();
+		 */
+		panelCamb1.setVisible(false);
+		panelCamb1.setSize(0, 0);
+		panelCamb2.setVisible(false);
+		panelCamb2.setSize(0, 0);
+		panelAgr.setVisible(true);
+		panelAgr.setSize(800, 400);
+
+	}
+
+	public void setVistaCl(JPanel panelCamb, JPanel panelAgr) {
+
+		panelCamb.setVisible(false);
+		panelCamb.setSize(0, 0);
+		panelAgr.setVisible(true);
+		panelAgr.setSize(870, 400);
+
 	}
 
 }

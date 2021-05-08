@@ -33,10 +33,15 @@ public class ControlOffers {
 		ofertas.remove(ofertas.get(n - 1));
 	}
 
-	public void setAVistaOffers(JPanel p, VistaGestionOffer v) {
-		p.removeAll();
-		p.add(v);
-		p.updateUI();
+	public void setAVistaOffers(JPanel panelCamb1, JPanel panelCamb2, VistaGestionOffer panelAgr) {
+
+		panelCamb1.setVisible(false);
+		panelCamb1.setSize(0, 0);
+		panelCamb2.setVisible(false);
+		panelCamb2.setSize(0, 0);
+		panelAgr.setVisible(true);
+		panelAgr.setSize(800, 400);
 
 	}
+
 }

@@ -5,29 +5,35 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
 
 public class EventoMenuGestCl implements ActionListener {
 
-	private JPanel panelCont;
+	private JPanel panelCambiar1, panelCambiar2, panelPoner;
 
-	private VistaRegistroClient vistaR;
+	// private VistaRegistroClient vistaR;
 
 	private ControlClient controlC;
 
-	public EventoMenuGestCl(JPanel panelCont) {
+	public EventoMenuGestCl(JPanel panelCambiar1, JPanel panelCambiar2, JPanel panelPoner) {
 
-		this.panelCont = panelCont;
+		this.panelCambiar1 = panelCambiar1;
 
-		vistaR = new VistaRegistroClient();
+		this.panelCambiar2 = panelCambiar2;
+
+		this.panelPoner = panelPoner;
+
+		// vistaR = new VistaRegistroClient();
 		controlC = new ControlClient();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		controlC.setAVistaCliente(panelCont, vistaR);
+		controlC.setVista(panelCambiar1, panelCambiar2, panelPoner);
 	}
 
+	/*
+	 * public static void addV() { controlC.setAVistaCliente(panelCont, vistaR); }
+	 */
 }

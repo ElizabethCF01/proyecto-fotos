@@ -7,10 +7,11 @@ import clientesVistas.VistaGestionCliente;
 import clientesVistas.VistaRegistroClient;
 import controlClientes.ControlClient;
 import controladorOfertas.ControlOffers;
+import vistasGenerales.VistaGeneral;
 
 public class EvIraAgreg implements ActionListener {
 
-	private VistaRegistroClient vistaContenedor;
+	private VistaRegistroClient vistaASust;
 
 	private VistaGestionCliente panelCambiar;
 
@@ -18,9 +19,9 @@ public class EvIraAgreg implements ActionListener {
 
 	private ControlClient ctrlCli;
 
-	public EvIraAgreg(VistaGestionCliente panelCambiar, VistaRegistroClient vistaContenedor) {
-		this.panelCambiar = panelCambiar;
-		this.vistaContenedor = vistaContenedor;
+	public EvIraAgreg(/* VistaGestionCliente panelCambiar, */ VistaRegistroClient vistaASust) {
+		// this.panelCambiar = panelCambiar;
+		this.vistaASust = vistaASust;
 
 		ctrlOf = new ControlOffers();
 		ctrlCli = new ControlClient();
@@ -30,9 +31,11 @@ public class EvIraAgreg implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		// vistaContenedor.cambiarVista(panelCambiar);
-		ctrlCli.setAVistaCliente(vistaContenedor.getPanelDeCambio(), panelCambiar);
+		panelCambiar = VistaGeneral.getVistaGestCl();
 
-		vistaContenedor.getBotAnt().setVisible(true);
+		ctrlCli.setVistaCl(vistaASust, panelCambiar);
+
+		// vistaASust.getBotAnt().setVisible(true);
 		panelCambiar.getBotAgregar().setVisible(true);
 
 		panelCambiar.removeCheckOffers(panelCambiar.getPanelCent());
