@@ -39,7 +39,7 @@ public class EvIraAgreg implements ActionListener {
 		panelCambiar.getBotAgregar().setVisible(true);
 
 		panelCambiar.removeCheckOffers(panelCambiar.getPanelCent());
-		panelCambiar.AddCheckOffer(ctrlOf.getOffers(), panelCambiar.getPanelCent());
+		panelCambiar.AddCheckOffer(/* ctrlOf.getOffers(), */ panelCambiar.getPanelCent());
 		panelCambiar.getPanelCent().setVisible(true);
 
 		panelCambiar.getCajaNombre().setEnabled(true);

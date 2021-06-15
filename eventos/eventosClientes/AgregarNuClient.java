@@ -2,6 +2,9 @@ package eventosClientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,9 +12,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import clientes.Cliente;
 import clientesVistas.VistaGestionCliente;
 import clientesVistas.VistaRegistroClient;
+import conexion.ConexionBD;
 import controlClientes.ControlClient;
 import controladorOfertas.ControlOffers;
 import ofertas.Oferta;
@@ -49,6 +52,10 @@ public class AgregarNuClient implements ActionListener {
 
 	private JTextArea area;
 
+	private ConexionBD conex;
+
+	private Statement s;
+
 	// private JPanel p;
 
 	// private VistaRegistroClient v;
@@ -68,6 +75,9 @@ public class AgregarNuClient implements ActionListener {
 		controlClient = new ControlClient();
 
 		mapaAux = new HashMap<Oferta, Integer>();
+
+		conex = new ConexionBD();
+		s = conex.getState();
 
 		// this.p=p;
 	}
@@ -91,31 +101,99 @@ public class AgregarNuClient implements ActionListener {
 			acomp = false;
 		}
 
-		for (int i = 0; i < controlOfert.getOffers().size(); i++) {
+		// **************************************************************************
 
-			if (casillasOf.get(i).isSelected()) {
+		boolean annadido = false;
 
-				cantOf = Integer.parseInt(cajasCant.get(i).getText());
-				Offer = controlOfert.getOffers().get(i);
+		try {
 
-				mapaAux.put(Offer, cantOf);
+			ResultSet r = s.executeQuery("SELECT COUNT(*) AS NumOf FROM ofertas WHERE CodigoOF IS NOT NULL ");
+
+			int n = 0;
+			if (r.next()) {
+				n = r.getInt(1);
 			}
 
+			for (int i = 0; i < n; i++) {
+
+				if (casillasOf.get(i).isSelected()) {
+
+					cantOf = Integer.parseInt(cajasCant.get(i).getText());
+
+					r = s.executeQuery("SELECT MAX(ID) FROM ofertas_clientes");
+
+					int ID = 0;
+					if (r.next()) {
+						ID = r.getInt(1) + 1;
+					}
+
+					r = s.executeQuery("SELECT MAX(IdCli) FROM clientes");
+
+					int IDCli = 0;
+
+					if (r.next()) {
+						IDCli = r.getInt(1) + 10;
+					}
+
+					if (annadido == false) {
+						controlClient.AnnadirCliente(IDCli, name, edad, telef, acomp);
+						annadido = true;
+					}
+
+					s.executeUpdate("INSERT INTO ofertas_clientes VALUES(" + ID + "," + IDCli + "," + (i + 1) + ","
+							+ cantOf + ")");
+
+					// Offer = controlOfert.getOffers().get(i);
+
+					// mapaAux.put(Offer, cantOf);
+				}
+
+			}
+
+			ResultSet r1 = s.executeQuery("SELECT * FROM clientes ");
+
+			area.setText("");
+			while (r1.next()) {
+
+				// System.out.println(r.getString(1) + " " +
+				// r1.getString(2) + " " + r1.getFloat(3)+ " " + r1.getFloat(4));
+
+				area.setText(area.getText() + r1.getString(1) + " " + r1.getString(2) + System.lineSeparator());
+			}
+
+		} catch (SQLException ev) {
+
+			ev.printStackTrace();
 		}
-		controlClient.getClientes().add(new Cliente(name, acomp, edad, telef));
 
-		int n = controlClient.getClientes().size() - 1;
+		/*
+		 * for (int i = 0; i < controlOfert.getOffers().size(); i++) {
+		 * 
+		 * if (casillasOf.get(i).isSelected()) {
+		 * 
+		 * cantOf = Integer.parseInt(cajasCant.get(i).getText()); Offer =
+		 * controlOfert.getOffers().get(i);
+		 * 
+		 * mapaAux.put(Offer, cantOf); }
+		 * 
+		 * } controlClient.getClientes().add(new Cliente(name, acomp, edad, telef));
+		 * 
+		 * int n = controlClient.getClientes().size() - 1;
+		 * 
+		 * controlClient.getClientes().get(n).getTiposOfertasCant().putAll(mapaAux);
+		 * 
+		 */
 
-		controlClient.getClientes().get(n).getTiposOfertasCant().putAll(mapaAux);
 		// System.out.println(controlClient.getClientes().size());
 
-		area.setText("");
-
-		for (int i = 0; i < controlClient.getClientes().size(); i++) {
-
-			area.setText(area.getText() + (i + 1) + "  " + controlClient.getClientes().get(i).getNombre()
-					+ System.lineSeparator());
-		}
+		/*
+		 * area.setText("");
+		 * 
+		 * for (int i = 0; i < controlClient.getClientes().size(); i++) {
+		 * 
+		 * area.setText(area.getText() + (i + 1) + "  " +
+		 * controlClient.getClientes().get(i).getNombre() + System.lineSeparator()); }
+		 */
 	}
 
 }

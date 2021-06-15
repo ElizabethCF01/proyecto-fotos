@@ -1,14 +1,23 @@
 package ofertas;
 
 public class Oferta {
+
 	private String nombre;
+
 	private float precio;
 
-	public Oferta(String n, float p) {
+	private int CodigoOf;
 
-		nombre = n;
-		precio = p;
+	public Oferta(int CodigoOf, String nombre, float precio) {
 
+		this.CodigoOf = CodigoOf;
+		this.nombre = nombre;
+		this.precio = precio;
+
+	}
+
+	public int getCodigo() {
+		return CodigoOf;
 	}
 
 	public float getPrecio() {
@@ -19,7 +28,11 @@ public class Oferta {
 		return nombre;
 	}
 
-	public void setPrecio(int i) {
+	public void setCodigo(int i) {
+		CodigoOf = i;
+	}
+
+	public void setPrecio(float i) {
 		precio = i;
 	}
 

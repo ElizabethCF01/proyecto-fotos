@@ -1,12 +1,8 @@
 package clientes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import ofertas.Oferta;
-
 public class Cliente {
+
+	private int ID;
 
 	private String nombreApellidos;
 
@@ -16,21 +12,25 @@ public class Cliente {
 
 	private int telef;
 
-	private ArrayList<String> tiposOffers;
+	// private ArrayList<String> tiposOffers;
 
-	private HashMap<Oferta, Integer> tiposOfferCant;
+	// private HashMap<Oferta, Integer> tiposOfferCant;
 
 	// private ControlOffers controlOf;
 
-	public Cliente(String nombreApellidos, boolean acompannante, int edad, int telef) {
-
+	public Cliente(int ID, String nombreApellidos, boolean acompannante, int edad, int telef) {
+		this.ID = ID;
 		this.nombreApellidos = nombreApellidos;
 		this.acompannante = acompannante;
 		this.edad = edad;
 		this.telef = telef;
-		tiposOffers = new ArrayList<String>();
-		tiposOfferCant = new HashMap<Oferta, Integer>();
+		// tiposOffers = new ArrayList<String>();
+		// tiposOfferCant = new HashMap<Oferta, Integer>();
 
+	}
+
+	public int getID() {
+		return this.ID;
 	}
 
 	public String getNombre() {
@@ -49,8 +49,12 @@ public class Cliente {
 		return this.telef;
 	}
 
-	public HashMap<Oferta, Integer> getTiposOfertasCant() {
-		return this.tiposOfferCant;
+	/*
+	 * public HashMap<Oferta, Integer> getTiposOfertasCant() { return
+	 * this.tiposOfferCant; }
+	 */
+	public void setID(int id) {
+		ID = id;
 	}
 
 	public void setNombre(String name) {
@@ -69,19 +73,18 @@ public class Cliente {
 		telef = tel;
 	}
 
-	public ArrayList<String> getCadenaOfCant() {
-
-		for (Map.Entry<Oferta, Integer> entrada : tiposOfferCant.entrySet()) {
-
-			Oferta o = entrada.getKey();
-			int c = entrada.getValue();
-
-			String s = o.getNombre() + "   " + o.getPrecio() + "   " + c;
-
-			tiposOffers.add(s);
-
-		}
-		return tiposOffers;
-	}
+	/*
+	 * public ArrayList<String> getCadenaOfCant() {
+	 * 
+	 * for (Map.Entry<Oferta, Integer> entrada : tiposOfferCant.entrySet()) {
+	 * 
+	 * Oferta o = entrada.getKey(); int c = entrada.getValue();
+	 * 
+	 * String s = o.getNombre() + "   " + o.getPrecio() + "   " + c;
+	 * 
+	 * tiposOffers.add(s);
+	 * 
+	 * } return tiposOffers; }
+	 */
 
 }

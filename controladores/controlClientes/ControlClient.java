@@ -1,29 +1,63 @@
 package controlClientes;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JPanel;
 
 import clientes.Cliente;
-import ofertas.Oferta;
+import conexion.ConexionBD;
 
 public class ControlClient {
 
-	private static ArrayList<Cliente> clientes;
+	// private static ArrayList<Cliente> clientes;
+
+	private Cliente clienteNuevo;
+
+	private Statement statem;
+
+	private ConexionBD conect;
 
 	public ControlClient() {
 
-		clientes = new ArrayList<Cliente>();
+		/*
+		 * clientes = new ArrayList<Cliente>();
+		 * 
+		 * Cliente cliente1 = new Cliente("Maria Gonzales Cue ", true, 18, 53457820);
+		 * cliente1.getTiposOfertasCant().put(new Oferta("Fotos 5x8", 25), 3);
+		 * 
+		 * clientes.add(cliente1);
+		 */
 
-		Cliente cliente1 = new Cliente("Maria Gonzales Cue ", true, 18, 53457820);
-		cliente1.getTiposOfertasCant().put(new Oferta("Fotos 5x8", 25), 3);
+		conect = new ConexionBD();
 
-		clientes.add(cliente1);
+		statem = conect.getState();
 
 	}
+	/*
+	 * public ArrayList<Cliente> getClientes() { return clientes; }
+	 */
 
-	public ArrayList<Cliente> getClientes() {
-		return clientes;
+	public void AnnadirCliente(int IdCliente, String nombre, int edad, int telef, boolean Acompannante) {
+		clienteNuevo = new Cliente(IdCliente, nombre, Acompannante, edad, telef);
+
+		int ID = clienteNuevo.getID();
+		String name = clienteNuevo.getNombre();
+		boolean acomp = clienteNuevo.getAcompannante();
+		int tel = clienteNuevo.getTelefono();
+		int age = clienteNuevo.getEdad();
+
+		try {
+
+			statem.executeUpdate(
+					"INSERT INTO clientes VALUES(" + ID + ",'" + name + "'," + age + "," + tel + "," + acomp + ")");
+
+		} catch (SQLException e) {
+
+			System.out.print("No funciona");
+			e.printStackTrace();
+		}
+
 	}
 
 	public void setVista(JPanel panelCamb1, JPanel panelCamb2, JPanel panelAgr) {

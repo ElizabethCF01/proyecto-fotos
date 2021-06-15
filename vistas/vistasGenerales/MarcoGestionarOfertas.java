@@ -3,6 +3,8 @@ package vistasGenerales;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import eventosGeneral.cerrarConexion;
+
 public class MarcoGestionarOfertas extends JFrame {
 
 	public static void main(String[] args) {
@@ -22,6 +24,8 @@ public class MarcoGestionarOfertas extends JFrame {
 
 		vistaGen = new VistaGeneral();
 		add(vistaGen);
+
+		addWindowListener(new cerrarConexion());
 	}
 
 }

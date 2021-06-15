@@ -1,6 +1,9 @@
 package clientesVistas;
 
 import java.awt.BorderLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -8,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import conexion.ConexionBD;
 import controlClientes.ControlClient;
 import eventosClientes.EVerDatosClient;
 import eventosClientes.EvIraAgreg;
@@ -18,7 +22,7 @@ public class VistaRegistroClient extends JPanel {
 
 	private JPanel panelNor, panelCent;
 
-	private JTextField numCl;
+	private JTextField idCliente;
 
 	private ControlClient cl;
 
@@ -30,9 +34,16 @@ public class VistaRegistroClient extends JPanel {
 
 	private EvIraAgreg evIr;
 
+	private ConexionBD conex;
+
+	private Statement s;
+
 	public VistaRegistroClient() {
 
 		setLayout(new BorderLayout());
+
+		conex = new ConexionBD();
+		s = conex.getState();
 
 		panelNor = new JPanel();
 		panelCent = new JPanel();
@@ -41,24 +52,40 @@ public class VistaRegistroClient extends JPanel {
 		vVerDatosCl.setVisible(false);
 
 		area = new JTextArea();
-		area.setEnabled(false);
+		area.setEditable(false);
 
-		JLabel noClientes = new JLabel("No. Cliente");
+		JLabel noClientes = new JLabel("ID Cliente");
 
-		numCl = new JTextField(3);
+		idCliente = new JTextField(3);
 
 		acceder = new JButton("Acceder");
 		agregar = new JButton("Agregar nuevo cliente");
 
 		cl = new ControlClient();
 
-		for (int i = 0; i < cl.getClientes().size(); i++) {
+		/*
+		 * for (int i = 0; i < cl.getClientes().size(); i++) {
+		 * 
+		 * area.setText(area.getText() + (i + 1) + " " +
+		 * cl.getClientes().get(i).getNombre() + System.lineSeparator());
+		 * 
+		 * }
+		 */
 
-			area.setText(area.getText() + (i + 1) + " " + cl.getClientes().get(i).getNombre() + System.lineSeparator());
+		try {
+			ResultSet r = s.executeQuery("SELECT  IdCli, Nombre FROM clientes ");
+			while (r.next()) {
 
+				area.setText(area.getText() + r.getString(1) + " " + r.getString(2) + System.lineSeparator());
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
 		}
 
-		evVerDatos = new EVerDatosClient(this, numCl);
+		evVerDatos = new EVerDatosClient(this, idCliente);
 
 		acceder.addActionListener(evVerDatos);
 
@@ -67,7 +94,7 @@ public class VistaRegistroClient extends JPanel {
 
 		panelCent.add(area);
 		panelNor.add(noClientes);
-		panelNor.add(numCl);
+		panelNor.add(idCliente);
 		panelNor.add(acceder);
 		panelNor.add(agregar);
 
